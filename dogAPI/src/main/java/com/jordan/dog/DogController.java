@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -22,10 +23,10 @@ public class DogController {
         return dogService.getDogs();
     }
 
-//    @GetMapping("{id}")
-//    public Dog getDogById(@PathVariable("id") Integer id) {
-//        return dogService.getDog(id);
-//    }
+    @GetMapping("{id}")
+    public Optional<Dog> getDogById(@PathVariable("id") Integer id) {
+        return dogService.selectDogById(id);
+    }
 
     @PostMapping
     public void registerDog(@RequestBody Dog dog) {

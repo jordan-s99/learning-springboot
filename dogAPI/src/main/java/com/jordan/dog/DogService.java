@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DogService {
@@ -31,20 +32,26 @@ public class DogService {
     public void deleteDog(int id) {
         dogDAO.deleteDog(id);
     }
+    // in Nelson's he checks for the dog's existence first - and if not, throws exceptions - but mine isn't working!! 
 
+
+    public Optional<Dog> selectDogById(int id) {
+        return dogDAO.selectDogById(id);
+//                .orElseThrow(() => new NotFoundException(String.format("Movie with id %s not found", id)));
+    }
 
     public void updateDog(int id, Dog dog) {
-        if (dogDAO.selectAllDogs().contains(id) == true) {
-            // this  might have to go in DogDataAccessService ...
-            // would i have to use setters for each value of the dog object?
-            // id, name, age, breed, favouriteToy
-        } else {
-            throw new IllegalStateException(
-                    "dog with id " + id + " does not exist"
-            );
+//        if (dogDAO.selectAllDogs().contains(id) == true) {
+//            // this  might have to go in DogDataAccessService ...
+//            // would i have to use setters for each value of the dog object?
+//            // id, name, age, breed, favouriteToy
+//        } else {
+//            throw new IllegalStateException(
+//                    "dog with id " + id + " does not exist"
+//            );
         }
     }
-}
+
 
 //    public Dog getDog(Integer id) {
 //        return dogDAO.selectDogById(id);
