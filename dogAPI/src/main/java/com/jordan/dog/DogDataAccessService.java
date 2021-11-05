@@ -1,5 +1,6 @@
 package com.jordan.dog;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,13 +12,19 @@ import static java.util.Arrays.stream;
 @Repository // the class that interacts with the database
 public class DogDataAccessService implements DogDAO {
 
+    private final JdbcTemplate jdbcTemplate;
     private List<Dog> dogs = new ArrayList<>();
 
-    public DogDataAccessService(){
-        dogs.add(new Dog(1, "Barley", 2, "Cockapoo", "tennis ball"));
-        dogs.add(new Dog(2, "Willow", 1, "Cockapoo", "pink dinosaur"));
-        dogs.add(new Dog(3, "Patrick", 2, "Chihuahua", "teething chew"));
+    public DogDataAccessService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        // with this template, we can run sql queries against our database
     }
+
+//    public DogDataAccessService(){
+//        dogs.add(new Dog(1, "Barley", 2, "Cockapoo", "tennis ball"));
+//        dogs.add(new Dog(2, "Willow", 1, "Cockapoo", "pink dinosaur"));
+//        dogs.add(new Dog(3, "Patrick", 2, "Chihuahua", "teething chew"));
+//    }
 
     @Override
     public List<Dog> selectAllDogs() {

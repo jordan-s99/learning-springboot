@@ -22,6 +22,11 @@ public class DogController {
         return dogService.getDogs();
     }
 
+//    @GetMapping("{id}")
+//    public Dog getDogById(@PathVariable("id") Integer id) {
+//        return dogService.getDog(id);
+//    }
+
     @PostMapping
     public void registerDog(@RequestBody Dog dog) {
         dogService.registerDog(dog);

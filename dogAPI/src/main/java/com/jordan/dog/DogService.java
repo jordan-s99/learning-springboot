@@ -1,6 +1,7 @@
 package com.jordan.dog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class DogService {
     public DogService(DogDAO dogDAO) {
         this.dogDAO = dogDAO;
     }
+
     // so these are calling on the methods we wrote in DogDataAccessService
     public List<Dog> getDogs() {
         return dogDAO.selectAllDogs();
@@ -33,14 +35,17 @@ public class DogService {
 
     public void updateDog(int id, Dog dog) {
         if (dogDAO.selectAllDogs().contains(id) == true) {
-        // this  might have to go in DogDataAccessService ...
-        // would i have to use setters for each value of the dog object?
-        // id, name, age, breed, favouriteToy
+            // this  might have to go in DogDataAccessService ...
+            // would i have to use setters for each value of the dog object?
+            // id, name, age, breed, favouriteToy
         } else {
             throw new IllegalStateException(
                     "dog with id " + id + " does not exist"
             );
         }
     }
-
 }
+
+//    public Dog getDog(Integer id) {
+//        return dogDAO.selectDogById(id);
+//};
